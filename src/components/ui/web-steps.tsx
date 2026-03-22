@@ -32,25 +32,28 @@ export default function WebSteps() {
         <div className="mb-16 md:mb-20">
           <AnimatedText
             text="Takto prichádzate o zákazníkov"
-            textClassName="text-[6vw] md:text-[4.5vw] font-display font-bold uppercase tracking-tighter leading-none text-center bg-gradient-to-r from-purple-400 via-pink-300 to-white bg-clip-text text-transparent whitespace-nowrap"
+            textClassName="text-[8.5vw] sm:text-[6vw] md:text-[4.5vw] font-display font-bold uppercase tracking-tighter leading-tight sm:leading-none text-center bg-gradient-to-r from-purple-400 via-pink-300 to-white bg-clip-text text-transparent sm:whitespace-nowrap"
             underlineClassName="text-white"
             underlineDuration={3}
           />
         </div>
 
         {/* Dark backdrop for readability */}
-        <div className="bg-zinc-950/60 backdrop-blur-md rounded-3xl p-8 md:p-12">
+        <div className="bg-zinc-950/60 backdrop-blur-md rounded-3xl p-5 sm:p-8 md:p-12">
           {/* Timeline */}
           <div className="relative mb-12">
             {/* Line */}
             <div className="hidden md:block absolute top-3 left-0 right-0 h-0.5 bg-white/40" />
 
             {/* Dots + Steps */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-14">
+            <div className="relative grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-14">
+              {/* Mobile vertical timeline line */}
+              <div className="md:hidden absolute left-[7px] top-2 bottom-2 w-0.5 bg-white/40" />
+
               {STEPS.map((step, i) => (
                 <motion.div
                   key={i}
-                  className="relative"
+                  className="relative pl-10 md:pl-0"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -59,7 +62,7 @@ export default function WebSteps() {
                   {/* Dot */}
                   <div className="hidden md:flex w-6 h-6 rounded-full border-[3px] border-white bg-white mb-8" />
                   {/* Mobile dot */}
-                  <div className="md:hidden w-4 h-4 rounded-full bg-white mb-4" />
+                  <div className="md:hidden absolute left-0 top-1 w-4 h-4 rounded-full bg-white" />
 
                   <p className="text-sm font-bold text-purple-300 uppercase tracking-wider mb-3">
                     {step.label}

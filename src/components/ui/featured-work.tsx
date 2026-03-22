@@ -71,6 +71,10 @@ export default function FeaturedWork() {
                   src={project.image}
                   alt={project.title}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  width={800}
+                  height={600}
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </motion.div>

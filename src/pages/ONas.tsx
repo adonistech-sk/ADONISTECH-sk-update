@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "motion/react";
+import { Helmet } from "react-helmet-async";
 import {
   Users,
   Target,
@@ -118,6 +119,15 @@ const SKILLS = [
 export default function ONas() {
   return (
     <div className="relative min-h-screen font-sans text-white">
+      <Helmet>
+        <title>O nás | AdonisTech — Náš tím a hodnoty</title>
+        <meta name="description" content="Spoznajte tím AdonisTech. Pomáhame firmám rásť cez moderné webové riešenia. Naše hodnoty, misia a prístup k práci." />
+        <link rel="canonical" href="https://adonistech.sk/o-nas" />
+        <meta property="og:title" content="O nás | AdonisTech — Náš tím a hodnoty" />
+        <meta property="og:description" content="Spoznajte tím AdonisTech. Pomáhame firmám rásť cez moderné webové riešenia." />
+        <meta property="og:url" content="https://adonistech.sk/o-nas" />
+        <meta name="keywords" content="AdonisTech tím, o nás, webová agentúra Nitra, naše hodnoty, digitálna agentúra Slovensko" />
+      </Helmet>
       {/* Hero */}
       <div className="pt-32 pb-16 md:pt-40 md:pb-24">
         <div className="max-w-7xl mx-auto px-6">
@@ -146,7 +156,7 @@ export default function ONas() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <span className="text-sm font-semibold uppercase tracking-widest text-purple-400 block mb-4">
+              <span className="hidden md:block text-sm font-semibold uppercase tracking-widest text-purple-400 mb-4">
                 Naša misia
               </span>
               <h2 className="text-3xl md:text-5xl font-display font-bold text-white tracking-tight mb-6 leading-tight">
@@ -174,12 +184,12 @@ export default function ONas() {
                   whileInView={{ opacity: 1, y: 0, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.12 }}
-                  className="border border-white/20 rounded-2xl bg-zinc-800/70 backdrop-blur-lg p-8 text-center hover:border-purple-400/50 transition-colors"
+                  className="border border-white/20 rounded-2xl bg-zinc-800/70 backdrop-blur-lg p-4 sm:p-6 md:p-8 text-center hover:border-purple-400/50 transition-colors"
                 >
-                  <span className="text-4xl md:text-5xl font-display font-bold bg-gradient-to-r from-purple-400 via-pink-300 to-white bg-clip-text text-transparent block mb-2">
+                  <span className="text-3xl sm:text-4xl md:text-5xl font-display font-bold bg-gradient-to-r from-purple-400 via-pink-300 to-white bg-clip-text text-transparent block mb-2">
                     <CountUp target={stat.value} suffix={stat.suffix} duration={2} />
                   </span>
-                  <span className="text-sm text-white uppercase tracking-wider font-semibold whitespace-nowrap">
+                  <span className="text-xs sm:text-sm text-white uppercase tracking-wider font-semibold md:whitespace-nowrap">
                     {stat.label}
                   </span>
                 </motion.div>
@@ -241,17 +251,19 @@ export default function ONas() {
           <div className="mb-16 md:mb-20">
             <AnimatedText
               text="Problémy, ktoré riešime"
-              textClassName="text-[6vw] md:text-[4.5vw] font-display font-bold text-center bg-gradient-to-r from-purple-400 via-pink-300 to-white bg-clip-text text-transparent uppercase tracking-tighter leading-none whitespace-nowrap"
+              textClassName="text-[8.5vw] sm:text-[6vw] md:text-[4.5vw] font-display font-bold text-center bg-gradient-to-r from-purple-400 via-pink-300 to-white bg-clip-text text-transparent uppercase tracking-tighter leading-none sm:whitespace-nowrap"
               underlineClassName="text-white"
               underlineDuration={3}
             />
           </div>
 
           <div className="relative max-w-4xl mx-auto">
-            {/* Vertical center line */}
-            <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/30 -translate-x-1/2" />
+            {/* Mobile vertical timeline line */}
+            <div className="md:hidden absolute left-[19px] top-0 bottom-0 w-0.5 bg-white/20" />
+            {/* Desktop vertical center line */}
+            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-white/30 -translate-x-1/2" />
 
-            <div className="space-y-12">
+            <div className="space-y-8 md:space-y-12 pl-14 md:pl-0">
               {[
                 { num: "01", title: "Nízke konverzie", description: "Návštevníci sa nemenia na zákazníkov, my to napravíme.", icon: <TrendingDown className="w-6 h-6" /> },
                 { num: "02", title: "Zastaralý dizajn", description: "Vaša značka pôsobí zastaralo, my ju posunieme na dnešnú úroveň.", icon: <Palette className="w-6 h-6" /> },
@@ -265,19 +277,24 @@ export default function ONas() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
-                  className={`relative flex ${i % 2 === 0 ? 'justify-start pr-[55%]' : 'justify-end pl-[55%]'}`}
+                  className={`relative flex ${i % 2 === 0 ? 'md:justify-start md:pr-[55%]' : 'md:justify-end md:pl-[55%]'}`}
                 >
-                  {/* Dot on center line */}
-                  <div className="absolute left-1/2 top-8 -translate-x-1/2 w-4 h-4 rounded-full bg-white border-4 border-zinc-950 z-10" />
+                  {/* Mobile icon on timeline line */}
+                  <div className="md:hidden absolute -left-14 top-3 w-10 h-10 rounded-xl bg-zinc-800 flex items-center justify-center text-purple-400 z-10">
+                    {item.icon}
+                  </div>
 
-                  {/* Icon circle */}
-                  <div className={`absolute top-5 z-10 ${i % 2 === 0 ? 'left-[calc(50%+20px)]' : 'right-[calc(50%+20px)]'}`}>
+                  {/* Desktop dot on center line */}
+                  <div className="hidden md:block absolute left-1/2 top-8 -translate-x-1/2 w-4 h-4 rounded-full bg-white border-4 border-zinc-950 z-10" />
+
+                  {/* Desktop icon circle */}
+                  <div className={`hidden md:block absolute top-5 z-10 ${i % 2 === 0 ? 'left-[calc(50%+20px)]' : 'right-[calc(50%+20px)]'}`}>
                     <div className="w-14 h-14 rounded-2xl bg-zinc-700/80 flex items-center justify-center text-purple-400">
                       {item.icon}
                     </div>
                   </div>
 
-                  <div className="border border-white/25 rounded-2xl bg-zinc-800/80 backdrop-blur-lg p-6 md:p-8 hover:border-purple-400/50 transition-colors w-full">
+                  <div className="border border-white/25 rounded-2xl bg-zinc-800/80 backdrop-blur-lg p-5 sm:p-6 md:p-8 hover:border-purple-400/50 transition-colors w-full">
                     <span className="text-xs font-bold uppercase tracking-widest text-purple-400 block mb-1">
                       Krok {item.num}
                     </span>
@@ -358,13 +375,13 @@ export default function ONas() {
         transition={{ duration: 0.7, ease: "easeOut" }}
         className="max-w-7xl mx-auto px-6 pb-32"
       >
-        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-12 md:p-16 text-center">
+        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 sm:p-10 md:p-16 text-center">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-3xl md:text-5xl font-display font-bold text-white mb-4"
+            className="text-2xl sm:text-3xl md:text-5xl font-display font-bold text-white mb-4"
           >
             Poďme tvoriť spolu
           </motion.h2>

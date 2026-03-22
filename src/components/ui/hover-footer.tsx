@@ -196,9 +196,9 @@ export default function HoverFooter() {
       <div className="max-w-7xl mx-auto p-8 md:p-14 z-40 relative">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-8 lg:gap-16 pb-12">
           {/* Brand section */}
-          <div className="flex flex-col space-y-4">
+          <div className="flex flex-col space-y-4 order-1 md:order-none">
             <div className="flex items-center">
-              <img src="https://ridbtuorcmkjidenxudx.supabase.co/storage/v1/object/public/Public%20main/AdonisTech%20(3)-Photoroom%20(1).webp" alt="Adonistech" className="h-[8.5rem]" />
+              <img src="https://ridbtuorcmkjidenxudx.supabase.co/storage/v1/object/public/Public%20main/AdonisTech%20(3)-Photoroom%20(1).webp" alt="Adonistech" className="h-20 sm:h-28 md:h-[8.5rem]" width={200} height={200} loading="lazy" decoding="async" />
             </div>
             <p className="text-sm leading-relaxed text-zinc-400">
               Tvoríme moderné webové stránky, aplikácie a digitálne riešenia pre rast vášho biznisu.
@@ -206,8 +206,8 @@ export default function HoverFooter() {
           </div>
 
           {/* Footer link sections */}
-          {footerLinks.map((section) => (
-            <div key={section.title}>
+          {footerLinks.map((section, idx) => (
+            <div key={section.title} className={`${idx === 0 ? 'order-3' : 'order-4'} md:order-none`}>
               <h4 className="text-white text-lg font-semibold mb-6">
                 {section.title}
               </h4>
@@ -238,7 +238,7 @@ export default function HoverFooter() {
           ))}
 
           {/* Contact section */}
-          <div>
+          <div className="order-2 md:order-none">
             <h4 className="text-white text-lg font-semibold mb-6">
               Kontakt
             </h4>

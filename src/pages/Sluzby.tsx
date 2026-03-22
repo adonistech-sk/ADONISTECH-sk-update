@@ -3,6 +3,7 @@ import { useLocation, Link } from "react-router-dom";
 import { Check, ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
 import { AnimatedText } from "@/src/components/ui/animated-underline-text";
+import { Helmet } from "react-helmet-async";
 
 const SERVICES = [
   {
@@ -114,6 +115,15 @@ export default function Sluzby() {
 
   return (
     <div className="relative min-h-screen font-sans text-white">
+      <Helmet>
+        <title>Služby | AdonisTech — Čo ponúkame</title>
+        <meta name="description" content="Webové stránky, e-shopy, dizajn produktov, automatizácia a vizuálna identita. Kompletné digitálne služby od AdonisTech." />
+        <link rel="canonical" href="https://adonistech.sk/sluzby" />
+        <meta property="og:title" content="Služby | AdonisTech — Čo ponúkame" />
+        <meta property="og:description" content="Webové stránky, e-shopy, dizajn produktov, automatizácia a vizuálna identita. Kompletné digitálne služby od AdonisTech." />
+        <meta property="og:url" content="https://adonistech.sk/sluzby" />
+        <meta name="keywords" content="webové služby, tvorba web stránok, e-shop riešenia, dizajn produktov, automatizácia, vizuálna identita, digitálne služby Slovensko" />
+      </Helmet>
       {/* Hero / Header */}
       <div className="pt-32 pb-16 md:pt-40 md:pb-20">
         <div className="max-w-7xl mx-auto px-6">
@@ -223,8 +233,8 @@ export default function Sluzby() {
                 transition={{ duration: 0.5, delay: i * 0.15 }}
                 className="relative"
               >
-                <div className="border border-white/20 rounded-2xl bg-zinc-800/70 backdrop-blur-lg p-8 h-full hover:border-purple-400/50 hover:bg-zinc-800/90 transition-all duration-300">
-                  <span className="text-6xl font-display font-bold text-purple-400 block mb-6">
+                <div className="border border-white/20 rounded-2xl bg-zinc-800/70 backdrop-blur-lg p-6 sm:p-8 h-full hover:border-purple-400/50 hover:bg-zinc-800/90 transition-all duration-300">
+                  <span className="text-5xl sm:text-6xl font-display font-bold text-purple-400 block mb-4 sm:mb-6">
                     {step.step}
                   </span>
                   <h3 className="text-xl font-display font-bold text-white mb-4">
@@ -253,13 +263,13 @@ export default function Sluzby() {
         transition={{ duration: 0.7, ease: "easeOut" }}
         className="max-w-7xl mx-auto px-6 pb-32"
       >
-        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-12 md:p-16 text-center">
+        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 sm:p-10 md:p-16 text-center">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-3xl md:text-5xl font-display font-bold text-white mb-4"
+            className="text-2xl sm:text-3xl md:text-5xl font-display font-bold text-white mb-4"
           >
             Začnime spolupracovať
           </motion.h2>

@@ -65,11 +65,11 @@ export default function HeroSection() {
         }}
       />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 pt-28 pb-12 sm:px-6 md:pt-36 md:pb-16 lg:px-8">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 items-center min-h-[75vh]">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 pt-20 pb-6 sm:pt-28 sm:pb-12 sm:px-6 md:pt-36 md:pb-16 lg:px-8">
+        <div className="grid grid-cols-1 gap-6 sm:gap-12 lg:grid-cols-2 items-center min-h-[75vh]">
 
           {/* --- LEFT COLUMN --- */}
-          <div className="flex flex-col justify-center space-y-8">
+          <div className="flex flex-col justify-center space-y-5 sm:space-y-8">
 
             {/* Badge */}
             <div className="animate-fade-in delay-100">
@@ -83,17 +83,17 @@ export default function HeroSection() {
 
             {/* Heading */}
             <h1
-              className="animate-fade-in delay-200 text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tighter leading-[1] uppercase"
+              className="animate-fade-in delay-200 text-5xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tighter leading-[1] uppercase"
             >
               Dizajn<br />
               <span className="bg-gradient-to-br from-white via-white to-[#ffcd75] bg-clip-text text-transparent">
-                Ktorý Prekonáva
+                Ktorý<br className="sm:hidden" /> Prekonáva
               </span><br />
               <WordRotate words={["Hranice", "Limity"]} className="inline-block bg-gradient-to-r from-purple-400 via-pink-300 to-white bg-clip-text text-transparent" />
             </h1>
 
             {/* Description */}
-            <p className="animate-fade-in delay-300 max-w-xl text-xl text-zinc-100 leading-relaxed">
+            <p className="animate-fade-in delay-300 max-w-xl text-base sm:text-xl text-zinc-100 leading-relaxed">
               Sme full-servisová agentúra, ktorá navrhuje a vyvíja weby, aplikácie a digitálne riešenia, pre rast vášho biznisu.
             </p>
 
@@ -108,11 +108,15 @@ export default function HeroSection() {
 
           {/* --- RIGHT COLUMN --- */}
           <div className="flex items-center justify-end">
-            <div className="animate-fade-in delay-500 relative w-full lg:scale-[1.6] lg:translate-x-4 lg:-translate-y-14">
+            <div className="animate-fade-in delay-500 relative w-full scale-[1.15] sm:scale-100 lg:scale-[1.6] lg:translate-x-4 lg:-translate-y-14">
               <img
                 src="https://ridbtuorcmkjidenxudx.supabase.co/storage/v1/object/public/Public%20main/Gemini_Generated_Image_pctkq4pctkq4pctk-Photoroom.webp"
                 alt="Hero visual"
                 className="w-full h-auto object-contain drop-shadow-2xl"
+                width={1200}
+                height={800}
+                loading="eager"
+                decoding="async"
               />
             </div>
           </div>
@@ -126,13 +130,13 @@ export default function HeroSection() {
             WebkitMaskImage: "linear-gradient(to right, transparent, black 15%, black 85%, transparent)"
           }}
         >
-          <div className="animate-marquee flex gap-16 whitespace-nowrap px-4">
+          <div className="animate-marquee flex gap-8 sm:gap-12 md:gap-16 whitespace-nowrap px-4">
             {[...INDUSTRIES, ...INDUSTRIES, ...INDUSTRIES].map((industry, i) => (
               <div
                 key={i}
                 className="flex items-center gap-2 opacity-50 transition-all hover:opacity-100 hover:scale-105 cursor-default"
               >
-                <span className="text-3xl font-bold text-white tracking-tight">
+                <span className="text-xl sm:text-2xl md:text-3xl font-bold text-white tracking-tight">
                   {industry}
                 </span>
               </div>

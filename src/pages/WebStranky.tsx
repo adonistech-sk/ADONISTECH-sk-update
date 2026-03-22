@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import {
   ArrowRight,
   ExternalLink,
@@ -162,6 +163,15 @@ const TECHNOLOGIES = [
 export default function WebStranky() {
   return (
     <div className="relative min-h-screen font-sans text-white">
+      <Helmet>
+        <title>Tvorba web stránok & e-shopov | AdonisTech</title>
+        <meta name="description" content="Profesionálny vývoj webových stránok a e-shopov na mieru. Od návrhu po spustenie za 7 dní. Moderné technológie, responzívny dizajn." />
+        <link rel="canonical" href="https://adonistech.sk/sluzby/web-stranky" />
+        <meta property="og:title" content="Tvorba web stránok & e-shopov | AdonisTech" />
+        <meta property="og:description" content="Profesionálny vývoj webových stránok a e-shopov na mieru. Od návrhu po spustenie za 7 dní." />
+        <meta property="og:url" content="https://adonistech.sk/sluzby/web-stranky" />
+        <meta name="keywords" content="tvorba web stránok na mieru, tvorba e-shopov, responzívny web dizajn, webová stránka pre firmu, e-shop Slovensko, moderné webové technológie" />
+      </Helmet>
       {/* Hero */}
       <div className="pt-32 pb-16 md:pt-40 md:pb-24">
         <div className="max-w-7xl mx-auto px-6">
@@ -212,6 +222,10 @@ export default function WebStranky() {
             src="https://ridbtuorcmkjidenxudx.supabase.co/storage/v1/object/public/Public%20main/Gemini_Generated_Image_gmjf5cgmjf5cgmjf.webp"
             alt="Web Stránky a E-shopy"
             className="w-full h-full object-cover"
+            width={1200}
+            height={514}
+            loading="lazy"
+            decoding="async"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/60 to-transparent" />
         </motion.div>
@@ -244,7 +258,7 @@ export default function WebStranky() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.05 }}
-                className="border border-white/10 rounded-2xl bg-white/5 backdrop-blur-sm p-7 hover:border-purple-500/30 transition-colors group"
+                className="border border-white/10 rounded-2xl bg-white/5 backdrop-blur-sm p-5 sm:p-7 hover:border-purple-500/30 transition-colors group"
               >
                 <div className="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 mb-5 group-hover:bg-purple-500/20 transition-colors">
                   {feature.icon}
@@ -288,9 +302,9 @@ export default function WebStranky() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="relative flex gap-8 py-8 border-b border-white/10 group"
+                className="relative flex gap-4 sm:gap-8 py-8 border-b border-white/10 group"
               >
-                <span className="text-5xl md:text-6xl font-display font-bold text-white/10 group-hover:text-purple-500/30 transition-colors w-20 flex-shrink-0">
+                <span className="text-4xl sm:text-5xl md:text-6xl font-display font-bold text-white/10 group-hover:text-purple-500/30 transition-colors w-14 sm:w-20 flex-shrink-0">
                   {step.step}
                 </span>
                 <div>
@@ -401,7 +415,7 @@ export default function WebStranky() {
             {TECHNOLOGIES.map((tech) => (
               <span
                 key={tech}
-                className="px-6 py-3 rounded-full border border-white/15 text-zinc-300 text-sm font-semibold hover:border-purple-500/30 hover:text-white transition-colors"
+                className="px-4 py-2.5 sm:px-6 sm:py-3 rounded-full border border-white/15 text-zinc-300 text-xs sm:text-sm font-semibold hover:border-purple-500/30 hover:text-white transition-colors"
               >
                 {tech}
               </span>
@@ -418,13 +432,13 @@ export default function WebStranky() {
         transition={{ duration: 0.7, ease: "easeOut" }}
         className="max-w-7xl mx-auto px-6 pb-32"
       >
-        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-12 md:p-16 text-center">
+        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 sm:p-10 md:p-16 text-center">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-3xl md:text-5xl font-display font-bold text-white mb-4"
+            className="text-2xl sm:text-3xl md:text-5xl font-display font-bold text-white mb-4"
           >
             Pripravení na nový web?
           </motion.h2>

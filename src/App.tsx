@@ -3,14 +3,16 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import Portfolio from '@/src/pages/Portfolio';
-import Sluzby from '@/src/pages/Sluzby';
-import WebStranky from '@/src/pages/WebStranky';
-import Kontakt from '@/src/pages/Kontakt';
-import ONas from '@/src/pages/ONas';
+
+const Portfolio = React.lazy(() => import('@/src/pages/Portfolio'));
+const Sluzby = React.lazy(() => import('@/src/pages/Sluzby'));
+const WebStranky = React.lazy(() => import('@/src/pages/WebStranky'));
+const Kontakt = React.lazy(() => import('@/src/pages/Kontakt'));
+const ONas = React.lazy(() => import('@/src/pages/ONas'));
+const NotFound = React.lazy(() => import('@/src/pages/NotFound'));
 import HeroSection from '@/src/components/ui/glassmorphism-trust-hero';
 import ScrollTextSection from '@/src/components/ui/scroll-text-section';
 import CardStack from '@/src/components/ui/card-stack';
@@ -20,6 +22,7 @@ import Testimonials from '@/src/components/ui/testimonials';
 import FAQ from '@/src/components/ui/faq';
 import HoverFooter from '@/src/components/ui/hover-footer';
 import { MagicText } from '@/src/components/ui/magic-text';
+import { Helmet } from 'react-helmet-async';
 import { 
   ArrowRight, 
   CheckCircle2, 
@@ -42,8 +45,17 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 20);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -76,15 +88,15 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className={`fixed left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'top-4 px-4 md:px-8' : 'top-0 px-0'}`}>
-      <div className={`max-w-7xl mx-auto px-6 h-20 flex items-center justify-between transition-all duration-500 ${isScrolled ? 'bg-zinc-950/70 backdrop-blur-xl border border-white/10 rounded-2xl shadow-lg shadow-black/20' : 'bg-transparent'}`}>
+    <nav className={`fixed left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'top-4 px-4 lg:px-8' : 'top-0 px-0'}`}>
+      <div className={`max-w-7xl mx-auto px-6 h-20 flex items-center justify-between transition-all duration-500 ${isScrolled ? 'bg-zinc-950/70 backdrop-blur-xl border border-white/10 rounded-2xl shadow-lg shadow-black/20' : 'bg-transparent'} ${isMobileMenuOpen ? 'lg:bg-transparent bg-zinc-950/50 backdrop-blur-xl rounded-b-none rounded-t-2xl' : ''}`}>
         {/* Logo */}
         <Link to="/" onClick={() => window.scrollTo(0, 0)}>
-          <img src="https://ridbtuorcmkjidenxudx.supabase.co/storage/v1/object/public/Public%20main/AdonisTech%20(3)-Photoroom%20(1).webp" alt="Adonistech" className="h-[6.75rem]" />
+          <img src="https://ridbtuorcmkjidenxudx.supabase.co/storage/v1/object/public/Public%20main/AdonisTech%20(3)-Photoroom%20(1).webp" alt="Adonistech" className="h-24 lg:h-[6.75rem]" width={200} height={200} loading="eager" />
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) =>
             link.isRoute ? (
               <Link
@@ -110,14 +122,14 @@ const Navbar = () => {
         </div>
 
         {/* CTA Button */}
-        <div className="hidden md:block">
+        <div className="hidden lg:block">
           <Link to="/kontakt" onClick={() => window.scrollTo(0, 0)} className="bg-white text-zinc-900 text-sm font-semibold px-6 py-2.5 rounded-full hover:bg-blue-500 hover:text-white hover:shadow-lg hover:shadow-blue-500/30 hover:scale-105 transition-all duration-300">
             Bezplatná Konzultácia
           </Link>
         </div>
 
         {/* Mobile Toggle */}
-        <button className="md:hidden text-white" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+        <button className="lg:hidden text-white" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
@@ -129,7 +141,7 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className={`md:hidden bg-zinc-950/95 backdrop-blur-xl overflow-hidden ${isScrolled ? 'border-t border-white/10 rounded-b-2xl' : 'border-t border-white/10'}`}
+            className={`lg:hidden bg-zinc-950/50 backdrop-blur-xl overflow-hidden ${isScrolled ? 'rounded-b-2xl' : ''}`}
           >
             <div className="px-6 py-8 flex flex-col gap-6">
               {navLinks.map((link) =>
@@ -309,6 +321,15 @@ const Pricing = () => {
 
 const HomePage = () => (
   <>
+    <Helmet>
+      <title>AdonisTech | Tvorba webových stránok & digitálne riešenia | Nitra</title>
+      <meta name="description" content="AdonisTech — profesionálna tvorba webových stránok, e-shopov, aplikácií a digitálnych riešení v Nitre. Bezplatná konzultácia. Moderný dizajn, rýchle dodanie." />
+      <link rel="canonical" href="https://adonistech.sk/" />
+      <meta property="og:title" content="AdonisTech | Tvorba webových stránok & digitálne riešenia" />
+      <meta property="og:description" content="Profesionálna tvorba webových stránok, e-shopov a digitálnych riešení v Nitre. Bezplatná konzultácia." />
+      <meta property="og:url" content="https://adonistech.sk/" />
+      <meta name="keywords" content="tvorba webových stránok, web dizajn Nitra, digitálna agentúra, AdonisTech, webové riešenia, moderný dizajn, bezplatná konzultácia" />
+    </Helmet>
     <main>
       <HeroSection />
       <ScrollTextSection />
@@ -331,11 +352,11 @@ const HomePage = () => (
       {/* CTA Section */}
       <section className="py-20 md:py-28 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-12 md:p-16 text-center">
-            <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-4">
+          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 sm:p-10 md:p-16 text-center">
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-display font-bold text-white mb-4">
               Začnime spolupracovať
             </h2>
-            <p className="text-lg text-zinc-300 max-w-xl mx-auto mb-8">
+            <p className="text-base sm:text-lg text-zinc-300 max-w-xl mx-auto mb-8">
               Povedzte nám o vašom projekte a my vám pripravíme riešenie na mieru. Prvá konzultácia je zadarmo.
             </p>
             <Link to="/kontakt" onClick={() => window.scrollTo(0, 0)} className="inline-flex items-center gap-2 bg-white text-zinc-900 px-8 py-4 rounded-full font-semibold text-sm hover:scale-[1.02] transition-transform active:scale-[0.98]">
@@ -355,14 +376,17 @@ export default function App() {
       <div className="fixed inset-0 z-0 bg-[url(https://ridbtuorcmkjidenxudx.supabase.co/storage/v1/object/public/Public%20main/istockphoto-1405483493-612x612.webp)] bg-cover bg-center opacity-70" />
       <div className="relative z-10">
         <Navbar />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/sluzby" element={<Sluzby />} />
-          <Route path="/sluzby/web-stranky" element={<WebStranky />} />
-          <Route path="/kontakt" element={<Kontakt />} />
-          <Route path="/o-nas" element={<ONas />} />
-        </Routes>
+        <Suspense fallback={null}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/sluzby" element={<Sluzby />} />
+            <Route path="/sluzby/web-stranky" element={<WebStranky />} />
+            <Route path="/kontakt" element={<Kontakt />} />
+            <Route path="/o-nas" element={<ONas />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
         <HoverFooter />
       </div>
     </div>

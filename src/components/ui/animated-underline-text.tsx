@@ -45,7 +45,7 @@ const AnimatedText = React.forwardRef<HTMLDivElement, AnimatedTextProps>(
         className={`flex flex-col items-center justify-center gap-2 ${className || ""}`}
         {...props}
       >
-        <div className="relative">
+        <div className="relative inline-block">
           <motion.h2
             className={textClassName}
             initial={{ y: -20, opacity: 0 }}

@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import emailjs from "@emailjs/browser";
+import { Helmet } from "react-helmet-async";
 import {
   Mail,
   Phone,
@@ -11,6 +13,7 @@ import {
   Linkedin,
   Facebook,
   ChevronDown,
+  CheckCircle,
 } from "lucide-react";
 
 function CustomSelect({
@@ -141,6 +144,7 @@ export default function Kontakt() {
     budget: "",
     message: "",
   });
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -148,13 +152,42 @@ export default function Kontakt() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
+    setSubmitStatus('sending');
+
+    try {
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          service: formData.service,
+          budget: formData.budget,
+          message: formData.message,
+          to_email: "adonistech.sk@gmail.com",
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
+      setSubmitStatus('success');
+      setFormData({ name: "", email: "", service: "", budget: "", message: "" });
+    } catch {
+      setSubmitStatus('error');
+    }
   };
 
   return (
     <div className="relative min-h-screen font-sans text-white">
+      <Helmet>
+        <title>Kontakt | AdonisTech — Bezplatná konzultácia</title>
+        <meta name="description" content="Kontaktujte AdonisTech pre bezplatnú konzultáciu. Napíšte nám alebo zavolajte na +421 950 280 922. Odpovieme do 24 hodín." />
+        <link rel="canonical" href="https://adonistech.sk/kontakt" />
+        <meta property="og:title" content="Kontakt | AdonisTech — Bezplatná konzultácia" />
+        <meta property="og:description" content="Kontaktujte AdonisTech pre bezplatnú konzultáciu. Napíšte nám alebo zavolajte na +421 950 280 922." />
+        <meta property="og:url" content="https://adonistech.sk/kontakt" />
+        <meta name="keywords" content="kontakt AdonisTech, bezplatná konzultácia, webová agentúra kontakt, cenová ponuka web stránka, kontaktný formulár" />
+      </Helmet>
       {/* Hero */}
       <div className="pt-32 pb-16 md:pt-40 md:pb-20">
         <div className="max-w-7xl mx-auto px-6">
@@ -189,92 +222,152 @@ export default function Kontakt() {
             transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
             className="lg:col-span-3"
           >
-            <div className="border border-white/15 rounded-3xl bg-zinc-900/60 backdrop-blur-xl p-8 md:p-10">
-              <h2 className="text-2xl font-display font-bold text-white mb-8">
-                Napíšte nám
-              </h2>
-              <form onSubmit={handleSubmit} className="space-y-5">
-                {/* Name & Email Row */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  <div>
-                    <label className="text-xs font-semibold uppercase tracking-widest text-zinc-300 block mb-2">
-                      Meno a priezvisko
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      placeholder="Vaše meno"
-                      className="w-full bg-white/[0.08] border border-white/15 rounded-xl px-5 py-3.5 text-white placeholder-zinc-400 focus:outline-none focus:border-purple-400/60 focus:ring-1 focus:ring-purple-400/30 transition-all text-sm"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className="text-xs font-semibold uppercase tracking-widest text-zinc-300 block mb-2">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="vas@email.sk"
-                      className="w-full bg-white/[0.08] border border-white/15 rounded-xl px-5 py-3.5 text-white placeholder-zinc-400 focus:outline-none focus:border-purple-400/60 focus:ring-1 focus:ring-purple-400/30 transition-all text-sm"
-                      required
-                    />
-                  </div>
-                </div>
+            <div className="border border-white/15 rounded-3xl bg-zinc-900/60 backdrop-blur-xl p-5 sm:p-8 md:p-10">
+              <AnimatePresence mode="wait">
+                {submitStatus === 'success' ? (
+                  <motion.div
+                    key="success"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
+                    className="flex flex-col items-center justify-center text-center py-16"
+                  >
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ duration: 0.4, delay: 0.2, type: "spring", stiffness: 200 }}
+                    >
+                      <CheckCircle className="w-20 h-20 text-green-400 mb-6" />
+                    </motion.div>
+                    <motion.h2
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: 0.4 }}
+                      className="text-3xl font-display font-bold text-white mb-3"
+                    >
+                      Ďakujeme za váš záujem!
+                    </motion.h2>
+                    <motion.p
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: 0.5 }}
+                      className="text-lg text-zinc-300 mb-8 max-w-md"
+                    >
+                      Vašu správu sme prijali a čoskoro sa vám ozveme.
+                    </motion.p>
+                    <motion.button
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: 0.6 }}
+                      onClick={() => setSubmitStatus('idle')}
+                      className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white px-6 py-3 rounded-full font-semibold text-sm hover:bg-white/20 transition-all"
+                    >
+                      Odoslať ďalšiu správu
+                      <ArrowRight className="w-4 h-4" />
+                    </motion.button>
+                  </motion.div>
+                ) : (
+                  <motion.div key="form" initial={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
+                    <h2 className="text-2xl font-display font-bold text-white mb-8">
+                      Napíšte nám
+                    </h2>
+                    <form onSubmit={handleSubmit} className="space-y-5">
+                      {/* Name & Email Row */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                          <label className="text-xs font-semibold uppercase tracking-widest text-zinc-300 block mb-2">
+                            Meno a priezvisko
+                          </label>
+                          <input
+                            type="text"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            placeholder="Vaše meno"
+                            className="w-full bg-white/[0.08] border border-white/15 rounded-xl px-5 py-3.5 text-white placeholder-zinc-400 focus:outline-none focus:border-purple-400/60 focus:ring-1 focus:ring-purple-400/30 transition-all text-sm"
+                            required
+                          />
+                        </div>
+                        <div>
+                          <label className="text-xs font-semibold uppercase tracking-widest text-zinc-300 block mb-2">
+                            Email
+                          </label>
+                          <input
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            placeholder="vas@email.sk"
+                            className="w-full bg-white/[0.08] border border-white/15 rounded-xl px-5 py-3.5 text-white placeholder-zinc-400 focus:outline-none focus:border-purple-400/60 focus:ring-1 focus:ring-purple-400/30 transition-all text-sm"
+                            required
+                          />
+                        </div>
+                      </div>
 
-                {/* Service & Budget Row */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  <CustomSelect
-                    label="Typ služby"
-                    placeholder="Vyberte službu"
-                    value={formData.service}
-                    onChange={(val) => setFormData({ ...formData, service: val })}
-                    options={SERVICE_OPTIONS.map((opt) => ({ value: opt, label: opt }))}
-                  />
-                  <CustomSelect
-                    label="Rozpočet"
-                    placeholder="Vyberte rozpočet"
-                    value={formData.budget}
-                    onChange={(val) => setFormData({ ...formData, budget: val })}
-                    options={[
-                      { value: "do-1000", label: "Do 1 000 €" },
-                      { value: "1000-2500", label: "1 000 – 2 500 €" },
-                      { value: "2500-5000", label: "2 500 – 5 000 €" },
-                      { value: "5000+", label: "5 000 € a viac" },
-                      { value: "neviem", label: "Zatiaľ neviem" },
-                    ]}
-                  />
-                </div>
+                      {/* Service & Budget Row */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <CustomSelect
+                          label="Typ služby"
+                          placeholder="Vyberte službu"
+                          value={formData.service}
+                          onChange={(val) => setFormData({ ...formData, service: val })}
+                          options={SERVICE_OPTIONS.map((opt) => ({ value: opt, label: opt }))}
+                        />
+                        <CustomSelect
+                          label="Rozpočet"
+                          placeholder="Vyberte rozpočet"
+                          value={formData.budget}
+                          onChange={(val) => setFormData({ ...formData, budget: val })}
+                          options={[
+                            { value: "do-1000", label: "Do 1 000 €" },
+                            { value: "1000-2500", label: "1 000 – 2 500 €" },
+                            { value: "2500-5000", label: "2 500 – 5 000 €" },
+                            { value: "5000+", label: "5 000 € a viac" },
+                            { value: "neviem", label: "Zatiaľ neviem" },
+                          ]}
+                        />
+                      </div>
 
-                {/* Message */}
-                <div>
-                  <label className="text-xs font-semibold uppercase tracking-widest text-zinc-300 block mb-2">
-                    Správa
-                  </label>
-                  <textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="Popíšte váš projekt, ciele a predstavy..."
-                    rows={5}
-                    className="w-full bg-white/[0.08] border border-white/15 rounded-xl px-5 py-3.5 text-white placeholder-zinc-400 focus:outline-none focus:border-purple-400/60 focus:ring-1 focus:ring-purple-400/30 transition-all text-sm resize-none"
-                    required
-                  />
-                </div>
+                      {/* Message */}
+                      <div>
+                        <label className="text-xs font-semibold uppercase tracking-widest text-zinc-300 block mb-2">
+                          Správa
+                        </label>
+                        <textarea
+                          name="message"
+                          value={formData.message}
+                          onChange={handleChange}
+                          placeholder="Popíšte váš projekt, ciele a predstavy..."
+                          rows={5}
+                          className="w-full bg-white/[0.08] border border-white/15 rounded-xl px-5 py-3.5 text-white placeholder-zinc-400 focus:outline-none focus:border-purple-400/60 focus:ring-1 focus:ring-purple-400/30 transition-all text-sm resize-none"
+                          required
+                        />
+                      </div>
 
-                {/* Submit */}
-                <button
-                  type="submit"
-                  className="group inline-flex items-center gap-3 bg-white text-zinc-900 px-8 py-4 rounded-full font-semibold text-sm hover:scale-[1.02] transition-transform active:scale-[0.98]"
-                >
-                  Odoslať správu
-                  <Send className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </button>
-              </form>
+                      {/* Error Message */}
+                      {submitStatus === 'error' && (
+                        <motion.p
+                          initial={{ opacity: 0, y: -5 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="text-red-400 text-sm"
+                        >
+                          Niečo sa pokazilo. Skúste to prosím znova alebo nás kontaktujte telefonicky.
+                        </motion.p>
+                      )}
+
+                      {/* Submit */}
+                      <button
+                        type="submit"
+                        disabled={submitStatus === 'sending'}
+                        className="group inline-flex items-center gap-3 bg-white text-zinc-900 px-8 py-4 rounded-full font-semibold text-sm hover:scale-[1.02] transition-transform active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
+                      >
+                        {submitStatus === 'sending' ? 'Odosiela sa...' : 'Odoslať správu'}
+                        <Send className={`w-4 h-4 transition-transform ${submitStatus === 'sending' ? 'animate-pulse' : 'group-hover:translate-x-1'}`} />
+                      </button>
+                    </form>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </motion.div>
 
@@ -286,7 +379,7 @@ export default function Kontakt() {
             className="lg:col-span-2 flex flex-col gap-6"
           >
             {/* Contact Details Card */}
-            <div className="border border-white/15 rounded-3xl bg-zinc-900/60 backdrop-blur-xl p-8 md:p-10 flex-grow">
+            <div className="border border-white/15 rounded-3xl bg-zinc-900/60 backdrop-blur-xl p-5 sm:p-8 md:p-10 flex-grow">
               <motion.h2
                 initial={{ opacity: 0, x: -15 }}
                 animate={{ opacity: 1, x: 0 }}

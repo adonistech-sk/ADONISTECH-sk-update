@@ -54,7 +54,7 @@ export default function Testimonials() {
         whileInView={{ opacity: 1, y: 0, scale: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="text-[6vw] md:text-[4.5vw] font-display font-bold text-center bg-gradient-to-r from-purple-400 via-pink-300 to-white bg-clip-text text-transparent mb-10 uppercase tracking-tighter leading-none whitespace-nowrap"
+        className="text-[7vw] sm:text-[6vw] md:text-[4.5vw] font-display font-bold text-center bg-gradient-to-r from-purple-400 via-pink-300 to-white bg-clip-text text-transparent mb-10 uppercase tracking-tighter leading-none sm:whitespace-nowrap px-4 sm:px-0"
       >
         Výsledky, ktoré hovoria za nás
       </motion.p>
@@ -84,13 +84,17 @@ export default function Testimonials() {
           {[...TESTIMONIALS, ...TESTIMONIALS].map((t, i) => (
             <div
               key={i}
-              className="flex-shrink-0 w-[350px] md:w-[400px] rounded-2xl border border-zinc-800 bg-zinc-900/60 backdrop-blur-sm p-6 flex flex-col"
+              className="flex-shrink-0 w-[280px] sm:w-[350px] md:w-[400px] rounded-2xl border border-zinc-800 bg-zinc-900/60 backdrop-blur-sm p-5 sm:p-6 flex flex-col"
             >
               <div className="flex items-center gap-3 mb-5">
                 <img
                   src={t.image}
                   alt={t.name}
                   className="w-10 h-10 rounded-full object-cover"
+                  width={80}
+                  height={80}
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div>
                   <p className="text-sm font-semibold text-white">{t.name}</p>

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, useScroll, useTransform } from "motion/react";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
@@ -64,36 +64,53 @@ function Card({
 
   return (
     <motion.div
-      style={{ scale, y, zIndex: index }}
-      className="sticky top-24 md:top-32 mb-[40vh]"
+      style={{ scale, y, zIndex: index, willChange: 'transform' }}
+      className="sticky top-[15vh] sm:top-24 md:top-32 mb-[10vh] sm:mb-[30vh] md:mb-[40vh]"
     >
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-0 rounded-3xl overflow-hidden shadow-2xl min-h-[420px] md:min-h-[500px]">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-0 rounded-3xl overflow-hidden shadow-2xl min-h-[320px] sm:min-h-[420px] md:min-h-[500px]">
+        {/* Image - mobile (on top) */}
+        <div className="relative bg-zinc-900 overflow-hidden lg:hidden aspect-[16/9]">
+          <img
+            src={service.image}
+            alt={service.title}
+            className="absolute inset-0 w-full h-full object-cover"
+            width={800}
+            height={600}
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+
         {/* Left - White info card */}
-        <div className="bg-white p-8 md:p-12 lg:p-16 flex flex-col justify-between relative">
+        <div className="bg-white p-6 sm:p-8 md:p-12 lg:p-16 flex flex-col justify-between relative">
           <div>
-            <div className="flex items-start justify-between gap-4 mb-12 md:mb-20">
+            <div className="flex items-start justify-between gap-3 sm:gap-4 mb-8 sm:mb-12 md:mb-20">
               <button
                 onClick={() => navigate(service.link)}
                 className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-black flex items-center justify-center flex-shrink-0 hover:bg-zinc-800 transition-colors cursor-pointer"
               >
                 <ArrowUpRight className="w-7 h-7 md:w-8 md:h-8 text-white" />
               </button>
-              <h3 className="text-4xl md:text-5xl lg:text-6xl font-display font-extrabold text-zinc-900 tracking-tight text-right leading-[1.05] whitespace-pre-line">
+              <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-extrabold text-zinc-900 tracking-tight text-right leading-[1.05] whitespace-pre-line">
                 {service.title}
               </h3>
             </div>
           </div>
-          <p className="text-lg md:text-xl text-zinc-500 leading-relaxed max-w-md">
+          <p className="text-base sm:text-lg md:text-xl text-zinc-500 leading-relaxed max-w-md">
             {service.description}
           </p>
         </div>
 
-        {/* Right - Image */}
+        {/* Image - desktop (right side) */}
         <div className="relative bg-zinc-900 overflow-hidden hidden lg:block">
           <img
             src={service.image}
             alt={service.title}
             className="absolute inset-0 w-full h-full object-cover"
+            width={800}
+            height={600}
+            loading="lazy"
+            decoding="async"
           />
         </div>
       </div>
@@ -103,6 +120,15 @@ function Card({
 
 export default function CardStack() {
   const ref = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 640);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end end"],
@@ -119,8 +145,8 @@ export default function CardStack() {
   return (
     <section
       ref={ref}
-      className="relative px-4 md:px-6 pb-24 md:pb-32 overflow-clip"
-      style={{ minHeight: `${SERVICES.length * 60}vh` }}
+      className="relative px-4 md:px-6 pb-8 sm:pb-16 md:pb-32 overflow-clip"
+      style={{ minHeight: `${SERVICES.length * (isMobile ? 22 : 60)}vh` }}
     >
       {/* Background glow effect */}
       <div className="absolute bottom-0 left-0 w-[50%] h-[60%] bg-yellow-300/10 blur-[120px] rounded-full pointer-events-none" />
