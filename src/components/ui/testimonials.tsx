@@ -54,7 +54,7 @@ export default function Testimonials() {
         whileInView={{ opacity: 1, y: 0, scale: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="text-[7vw] sm:text-[6vw] md:text-[4.5vw] font-display font-bold text-center bg-gradient-to-r from-purple-400 via-pink-300 to-white bg-clip-text text-transparent mb-10 uppercase tracking-tighter leading-none sm:whitespace-nowrap px-4 sm:px-0"
+        className="text-[7vw] sm:text-[6vw] md:text-[4.5vw] font-display font-bold text-center bg-gradient-to-r from-white to-pink-300 sm:from-purple-400 sm:via-pink-300 sm:to-white bg-clip-text text-transparent mb-10 uppercase tracking-tighter leading-none sm:whitespace-nowrap px-4 sm:px-0"
       >
         Výsledky, ktoré hovoria za nás
       </motion.p>

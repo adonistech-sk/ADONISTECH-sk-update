@@ -152,7 +152,7 @@ export default function CardStack() {
       <div className="absolute bottom-0 left-0 w-[50%] h-[60%] bg-yellow-300/10 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto pt-16 md:pt-24 mb-12 md:mb-16">
-        <h2 className="text-[12vw] md:text-[10vw] font-display font-bold uppercase tracking-tighter leading-none text-center bg-gradient-to-r from-purple-400 via-pink-300 to-white bg-clip-text text-transparent">
+        <h2 className="text-[12vw] md:text-[10vw] font-display font-bold uppercase tracking-tighter leading-none text-center bg-gradient-to-r from-white to-pink-300 sm:from-purple-400 sm:via-pink-300 sm:to-white bg-clip-text text-transparent">
           Naše služby
         </h2>
       </div>

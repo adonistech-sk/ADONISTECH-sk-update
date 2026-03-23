@@ -54,7 +54,7 @@ export default function FAQ() {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="lg:sticky lg:top-32"
           >
-            <h2 className="text-[12vw] md:text-[10vw] lg:text-[6vw] font-display font-bold uppercase tracking-tighter leading-none bg-gradient-to-r from-purple-400 via-pink-300 to-white bg-clip-text text-transparent">
+            <h2 className="text-[12vw] md:text-[10vw] lg:text-[6vw] font-display font-bold uppercase tracking-tighter leading-none bg-gradient-to-r from-white to-pink-300 sm:from-purple-400 sm:via-pink-300 sm:to-white bg-clip-text text-transparent">
               Odpovede,
               <br />
               ktoré

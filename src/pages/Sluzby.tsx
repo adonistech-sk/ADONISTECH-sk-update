@@ -132,7 +132,7 @@ export default function Sluzby() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <h1 className="text-[14vw] md:text-[10vw] lg:text-[8vw] font-display font-bold uppercase tracking-tighter leading-none bg-gradient-to-r from-purple-400 via-pink-300 to-white bg-clip-text text-transparent mb-6">
+            <h1 className="text-[14vw] md:text-[10vw] lg:text-[8vw] font-display font-bold uppercase tracking-tighter leading-none bg-gradient-to-r from-white to-pink-300 sm:from-purple-400 sm:via-pink-300 sm:to-white bg-clip-text text-transparent mb-6">
               Služby
             </h1>
           </motion.div>
@@ -208,7 +208,7 @@ export default function Sluzby() {
           <div className="mb-16 text-center">
             <AnimatedText
               text="Ako pracujeme"
-              textClassName="text-[10vw] md:text-[6vw] lg:text-[5vw] font-display font-bold uppercase tracking-tighter leading-none bg-gradient-to-r from-purple-400 via-pink-300 to-white bg-clip-text text-transparent"
+              textClassName="text-[10vw] md:text-[6vw] lg:text-[5vw] font-display font-bold uppercase tracking-tighter leading-none bg-gradient-to-r from-white to-pink-300 sm:from-purple-400 sm:via-pink-300 sm:to-white bg-clip-text text-transparent"
               underlineClassName="text-white"
               underlineDuration={3}
             />

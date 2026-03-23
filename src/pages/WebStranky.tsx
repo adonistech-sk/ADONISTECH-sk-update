@@ -183,7 +183,7 @@ export default function WebStranky() {
             <span className="inline-block text-sm font-semibold uppercase tracking-widest text-purple-400 mb-4">
               01 — Naše služby
             </span>
-            <h1 className="text-[12vw] md:text-[8vw] lg:text-[6vw] font-display font-bold uppercase tracking-tighter leading-[0.9] bg-gradient-to-r from-purple-400 via-pink-300 to-white bg-clip-text text-transparent mb-8">
+            <h1 className="text-[12vw] md:text-[8vw] lg:text-[6vw] font-display font-bold uppercase tracking-tighter leading-[0.9] bg-gradient-to-r from-white to-pink-300 sm:from-purple-400 sm:via-pink-300 sm:to-white bg-clip-text text-transparent mb-8">
               Web Stránky
               <br />
               & E-shopy

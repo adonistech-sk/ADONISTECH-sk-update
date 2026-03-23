@@ -35,7 +35,7 @@ export default function FeaturedWork() {
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="text-[12vw] md:text-[10vw] font-display font-bold uppercase tracking-tighter leading-none text-center bg-gradient-to-r from-purple-400 via-pink-300 to-white bg-clip-text text-transparent mb-16 md:mb-20"
+          className="text-[12vw] md:text-[10vw] font-display font-bold uppercase tracking-tighter leading-none text-center bg-gradient-to-r from-white to-pink-300 sm:from-purple-400 sm:via-pink-300 sm:to-white bg-clip-text text-transparent mb-16 md:mb-20"
         >
           Portfólio
         </motion.h2>

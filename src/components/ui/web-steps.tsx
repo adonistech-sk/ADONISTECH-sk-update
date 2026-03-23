@@ -32,7 +32,7 @@ export default function WebSteps() {
         <div className="mb-16 md:mb-20">
           <AnimatedText
             text="Takto prichádzate o zákazníkov"
-            textClassName="text-[8.5vw] sm:text-[6vw] md:text-[4.5vw] font-display font-bold uppercase tracking-tighter leading-tight sm:leading-none text-center bg-gradient-to-r from-purple-400 via-pink-300 to-white bg-clip-text text-transparent sm:whitespace-nowrap"
+            textClassName="text-[8.5vw] sm:text-[6vw] md:text-[4.5vw] font-display font-bold uppercase tracking-tighter leading-tight sm:leading-none text-center bg-gradient-to-r from-white to-pink-300 sm:from-purple-400 sm:via-pink-300 sm:to-white bg-clip-text text-transparent sm:whitespace-nowrap"
             underlineClassName="text-white"
             underlineDuration={3}
           />

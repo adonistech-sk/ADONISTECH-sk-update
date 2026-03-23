@@ -136,7 +136,7 @@ export default function ONas() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-[14vw] md:text-[10vw] lg:text-[8vw] font-display font-bold uppercase tracking-tighter leading-none bg-gradient-to-r from-purple-400 via-pink-300 to-white bg-clip-text text-transparent mb-6">
+            <h1 className="text-[14vw] md:text-[10vw] lg:text-[8vw] font-display font-bold uppercase tracking-tighter leading-none bg-gradient-to-r from-white to-pink-300 sm:from-purple-400 sm:via-pink-300 sm:to-white bg-clip-text text-transparent mb-6">
               O nás
             </h1>
             <p className="text-xl md:text-2xl text-zinc-300 max-w-3xl leading-relaxed">
@@ -186,7 +186,7 @@ export default function ONas() {
                   transition={{ duration: 0.5, delay: i * 0.12 }}
                   className="border border-white/20 rounded-2xl bg-zinc-800/70 backdrop-blur-lg p-4 sm:p-6 md:p-8 text-center hover:border-purple-400/50 transition-colors"
                 >
-                  <span className="text-3xl sm:text-4xl md:text-5xl font-display font-bold bg-gradient-to-r from-purple-400 via-pink-300 to-white bg-clip-text text-transparent block mb-2">
+                  <span className="text-3xl sm:text-4xl md:text-5xl font-display font-bold bg-gradient-to-r from-white to-pink-300 sm:from-purple-400 sm:via-pink-300 sm:to-white bg-clip-text text-transparent block mb-2">
                     <CountUp target={stat.value} suffix={stat.suffix} duration={2} />
                   </span>
                   <span className="text-xs sm:text-sm text-white uppercase tracking-wider font-semibold md:whitespace-nowrap">
@@ -251,7 +251,7 @@ export default function ONas() {
           <div className="mb-16 md:mb-20">
             <AnimatedText
               text="Problémy, ktoré riešime"
-              textClassName="text-[8.5vw] sm:text-[6vw] md:text-[4.5vw] font-display font-bold text-center bg-gradient-to-r from-purple-400 via-pink-300 to-white bg-clip-text text-transparent uppercase tracking-tighter leading-none sm:whitespace-nowrap"
+              textClassName="text-[8.5vw] sm:text-[6vw] md:text-[4.5vw] font-display font-bold text-center bg-gradient-to-r from-white to-pink-300 sm:from-purple-400 sm:via-pink-300 sm:to-white bg-clip-text text-transparent uppercase tracking-tighter leading-none sm:whitespace-nowrap"
               underlineClassName="text-white"
               underlineDuration={3}
             />
@@ -318,7 +318,7 @@ export default function ONas() {
           <div className="mb-16 text-center">
             <AnimatedText
               text="Ako pracujeme"
-              textClassName="text-[10vw] md:text-[6vw] lg:text-[5vw] font-display font-bold uppercase tracking-tighter leading-none bg-gradient-to-r from-purple-400 via-pink-300 to-white bg-clip-text text-transparent"
+              textClassName="text-[10vw] md:text-[6vw] lg:text-[5vw] font-display font-bold uppercase tracking-tighter leading-none bg-gradient-to-r from-white to-pink-300 sm:from-purple-400 sm:via-pink-300 sm:to-white bg-clip-text text-transparent"
               underlineClassName="text-white"
               underlineDuration={3}
             />

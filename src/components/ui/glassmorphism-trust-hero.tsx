@@ -89,7 +89,7 @@ export default function HeroSection() {
               <span className="bg-gradient-to-br from-white via-white to-[#ffcd75] bg-clip-text text-transparent">
                 Ktorý<br className="sm:hidden" /> Prekonáva
               </span><br />
-              <WordRotate words={["Hranice", "Limity"]} className="inline-block bg-gradient-to-r from-purple-400 via-pink-300 to-white bg-clip-text text-transparent" />
+              <WordRotate words={["Hranice", "Limity"]} className="inline-block bg-gradient-to-r from-white to-pink-300 sm:from-purple-400 sm:via-pink-300 sm:to-white bg-clip-text text-transparent" />
             </h1>
 
             {/* Description */}
