@@ -11,3 +11,18 @@
     @apply bg-white text-slate-900 antialiased;
   }
 }
+
+/*
+  iOS Safari fix: pri `background-clip: text` (Tailwind `.bg-clip-text`) WebKit
+  občas nepremaľuje orezaný gradient a text zmizne (napr. po návrate do tabu,
+  v Low Power Mode alebo popri transform-animáciách predka). Toto pravidlo drží
+  prvok na vlastnej kompozitnej vrstve a doplní WebKit-prefix vlastnosti, takže
+  sa gradient prekreslí spoľahlivo. Iba rendering — nemení vzhľad.
+*/
+.bg-clip-text {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  will-change: background-position;
+}
