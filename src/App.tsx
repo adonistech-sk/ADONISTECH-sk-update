@@ -12,6 +12,8 @@ const Sluzby = React.lazy(() => import('@/src/pages/Sluzby'));
 const WebStranky = React.lazy(() => import('@/src/pages/WebStranky'));
 const Kontakt = React.lazy(() => import('@/src/pages/Kontakt'));
 const ONas = React.lazy(() => import('@/src/pages/ONas'));
+const OchranaOsobnychUdajov = React.lazy(() => import('@/src/pages/OchranaOsobnychUdajov'));
+const ObchodnePodmienky = React.lazy(() => import('@/src/pages/ObchodnePodmienky'));
 const NotFound = React.lazy(() => import('@/src/pages/NotFound'));
 import HeroSection from '@/src/components/ui/glassmorphism-trust-hero';
 import ScrollTextSection from '@/src/components/ui/scroll-text-section';
@@ -384,6 +386,8 @@ export default function App() {
             <Route path="/sluzby/web-stranky" element={<WebStranky />} />
             <Route path="/kontakt" element={<Kontakt />} />
             <Route path="/o-nas" element={<ONas />} />
+            <Route path="/ochrana-osobnych-udajov" element={<OchranaOsobnychUdajov />} />
+            <Route path="/obchodne-podmienky" element={<ObchodnePodmienky />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

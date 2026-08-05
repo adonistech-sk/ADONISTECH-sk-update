@@ -172,6 +172,13 @@ export default function HoverFooter() {
         { label: "Kontakt", href: "/kontakt" },
       ],
     },
+    {
+      title: "Právne informácie",
+      links: [
+        { label: "Ochrana osobných údajov", href: "/ochrana-osobnych-udajov" },
+        { label: "Obchodné podmienky", href: "/obchodne-podmienky" },
+      ],
+    },
   ];
 
   const contactInfo = [
@@ -194,7 +201,7 @@ export default function HoverFooter() {
   return (
     <footer className="relative h-fit rounded-3xl overflow-hidden m-4 md:m-8 bg-zinc-900/30 border border-white/5">
       <div className="max-w-7xl mx-auto p-8 md:p-14 z-40 relative">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-8 lg:gap-16 pb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 md:gap-8 lg:gap-16 pb-12">
           {/* Brand section */}
           <div className="flex flex-col space-y-4 order-1 md:order-none">
             <div className="flex items-center">
@@ -267,9 +274,12 @@ export default function HoverFooter() {
         <hr className="border-t border-white/10 my-8" />
 
         {/* Footer bottom */}
-        <div className="flex justify-center items-center text-sm">
+        <div className="flex flex-col items-center gap-3 text-sm">
           <p className="text-zinc-500 text-center">
             &copy; {new Date().getFullYear()} Adonistech. Všetky práva vyhradené.
+          </p>
+          <p className="text-zinc-500/60 text-xs text-center leading-relaxed max-w-3xl">
+            Samuel Utanakachi Nduka - ADONISTECH · IČO: 57&nbsp;664&nbsp;447 · Pod Zlatým brehom 786/19, 949&nbsp;01 Nitra · Zapísané v Živnostenskom registri Okresného úradu Nitra, č. 430-74391 · Nie sme platcami DPH.
           </p>
         </div>
       </div>

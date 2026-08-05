@@ -14,7 +14,18 @@ import {
   Facebook,
   ChevronDown,
   CheckCircle,
+  Building2,
 } from "lucide-react";
+
+const COMPANY_INFO = [
+  { label: "Obchodné meno", value: "Samuel Utanakachi Nduka - ADONISTECH" },
+  { label: "IČO", value: "57 664 447" },
+  { label: "Miesto podnikania", value: "Pod Zlatým brehom 786/19, 949 01 Nitra" },
+  {
+    label: "Zapísané v",
+    value: "Živnostenský register Okresného úradu Nitra, č. 430-74391",
+  },
+];
 
 function CustomSelect({
   label,
@@ -433,6 +444,33 @@ export default function Kontakt() {
                   Na každú správu odpovedáme do 24 hodín. Pripadne nás neváhajte kontaktovať telefonicky.
                 </p>
               </motion.div>
+            </div>
+
+            {/* Company / Billing Details Card */}
+            <div className="border border-white/15 rounded-3xl bg-zinc-900/60 backdrop-blur-xl p-5 sm:p-8 md:p-10">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-11 h-11 rounded-xl bg-purple-500/15 border border-purple-500/25 flex items-center justify-center text-purple-400 flex-shrink-0">
+                  <Building2 className="w-5 h-5" />
+                </div>
+                <h2 className="text-2xl font-display font-bold text-white">
+                  Firemné údaje
+                </h2>
+              </div>
+              <dl className="space-y-4">
+                {COMPANY_INFO.map((item) => (
+                  <div key={item.label}>
+                    <dt className="text-xs font-semibold uppercase tracking-widest text-purple-300 mb-0.5">
+                      {item.label}
+                    </dt>
+                    <dd className="text-sm text-white font-medium leading-relaxed">
+                      {item.value}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+              <p className="mt-6 pt-5 border-t border-white/10 text-xs text-zinc-400">
+                Nie sme platcami DPH.
+              </p>
             </div>
           </motion.div>
         </div>
